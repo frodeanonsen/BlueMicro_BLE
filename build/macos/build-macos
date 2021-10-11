@@ -21,7 +21,7 @@ boardParam=$1
 
 arduinoPath="/Applications/Arduino.app"
 arduinoDataPath=$(cd ~/Library/Arduino15 && pwd)
-nrf52PackagePath="$arduinoDataPath/packages/adafruit/hardware/nrf52"
+nrf52PackagePath="$arduinoDataPath/packages/community_nrf52/hardware/nrf52"
 
 scriptPath="$(dirname "$BASH_SOURCE")"
 
@@ -79,16 +79,16 @@ arduino_compile() {
     fi
 
     if [ "$fqbn" != "feather52832" ]; then
-      fqbnsd="s140v6"  
+      fqbnsd="s140v6"
     else
       fqbnsd="s132v6"
     fi
 
 
    #Compile
-   cmdCompile="$arduinoPath/Contents/Java/arduino-builder -compile -logger=machine -hardware $arduinoPath/Contents/Java/hardware -hardware $arduinoDataPath/packages -tools $arduinoPath/Contents/Java/tools-builder -tools $arduinoPath/Contents/Java/hardware/tools/avr -tools $arduinoDataPath/packages -built-in-libraries $arduinoPath/Contents/Java/libraries -fqbn=adafruit:nrf52:$fqbn:softdevice=$fqbnsd,debug=$fqbndb -ide-version=10805 -vid-pid=0000_0000 -build-path $buildPath -warnings=none -build-cache $buildCachePath -prefs=build.warn_data_percentage=75 -prefs=runtime.tools.arm-none-eabi-gcc.path=$arduinoDataPath/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4 -prefs=runtime.tools.arm-none-eabi-gcc-9-2019q4.path=$arduinoDataPath/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4 -prefs=runtime.tools.nrfjprog-9.4.0.path=$arduinoDataPath/packages/adafruit/tools/nrfjprog/9.4.0 -prefs=runtime.tools.nrfjprog.path=$arduinoDataPath/packages/adafruit/tools/nrfjprog/9.4.0 $sourcePath/firmware.ino"
+   cmdCompile="$arduinoPath/Contents/Java/arduino-builder -compile -logger=machine -hardware $arduinoPath/Contents/Java/hardware -hardware $arduinoDataPath/packages -tools $arduinoPath/Contents/Java/tools-builder -tools $arduinoPath/Contents/Java/hardware/tools/avr -tools $arduinoDataPath/packages -built-in-libraries $arduinoPath/Contents/Java/libraries -fqbn=community_nrf52:nrf52:$fqbn:softdevice=$fqbnsd,debug=$fqbndb -ide-version=10805 -vid-pid=0000_0000 -build-path $buildPath -warnings=none -build-cache $buildCachePath -prefs=build.warn_data_percentage=75 -prefs=runtime.tools.arm-none-eabi-gcc.path=$arduinoDataPath/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4 -prefs=runtime.tools.arm-none-eabi-gcc-9-2019q4.path=$arduinoDataPath/packages/adafruit/tools/arm-none-eabi-gcc/9-2019q4 -prefs=runtime.tools.nrfjprog-9.4.0.path=$arduinoDataPath/packages/adafruit/tools/nrfjprog/9.4.0 -prefs=runtime.tools.nrfjprog.path=$arduinoDataPath/packages/adafruit/tools/nrfjprog/9.4.0 $sourcePath/firmware.ino"
 
-   if $verbose; then 
+   if $verbose; then
       $cmdCompile
    else
       $cmdCompile > /dev/null
@@ -97,13 +97,13 @@ arduino_compile() {
    (($? != 0)) && failed=true || failed=false
 
    set -e
-   
+
    if $failed; then
      failedBuilds=$((failedBuilds+1))
      printf "${RED}Failed${NC}\n"
    else
      [[ -d $outputPath/$keyboard ]] || mkdir $outputPath/$keyboard
-   
+
      cp -f $buildPath/firmware.ino.zip $outputPath/$keyboard/$keyboard-$fqbn-$hardware-$keymap-$target.zip
      cp -f $buildPath/firmware.ino.hex $outputPath/$keyboard/$keyboard-$fqbn-$hardware-$keymap-$target.hex
      cp -f $buildPath/firmware.ino.elf $outputPath/$keyboard/$keyboard-$fqbn-$hardware-$keymap-$target.elf
@@ -129,7 +129,7 @@ if [ -z "$boardParam" ]; then
    selectedTarget="all"
    selectedFqbn="all"
    selectedHardware="all"
-   
+
    printf "\n"
    read -p "Keyboard name (eg ErgoTravel) [all]: " selectedKeyboard
    selectedKeyboard=${selectedKeyboard:-all}
@@ -171,7 +171,7 @@ else
    if [ -z "$selectedTarget" ]; then
       selectedTarget="all"
    fi
-   
+
    selectedHardware="${boardParamSplit[3]}"
    if [ -z "$selectedHardware" ]; then
       selectedHardware="all"
@@ -290,7 +290,7 @@ do
 
       targets+=($target)
    done
-   
+
    for keymap in "${keymaps[@]}"; do
       for target in "${targets[@]}"; do
          for fqbn in "${fqbns[@]}"; do

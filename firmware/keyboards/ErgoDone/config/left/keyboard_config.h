@@ -34,33 +34,46 @@ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR P
 #define MANUFACTURER_NAME                   "anonsen.org"                      /**< Manufacturer. Will be passed to Device Information Service. */
 
 
-#if KEYBOARD_SIDE == RIGHT
+#if KEYBOARD_SIDE == LEFT
 #define KEYMAP( \
-      k00, k01, k02, k03, k04, k05, k06, \
-      k10, k11, k12, k13, k14, k15, k16, \
-      k20, k21, k22, k23, k24, k25, k26, \
-      k30, k31, k32, k33, k34, k35,  k36 \
+      k00,k01,k02,k03,k04,k05,k06,    \
+      k10,k11,k12,k13,k14,k15,k16,    \
+      k20,k21,k22,k23,k24,k25,        \
+      k30,k31,k32,k33,k34,k35,k36,    \
+      k40,k41,k42,k43,k44,            \
+                            k55,k56,  \
+                                k54,  \
+                        k53,k52,k51   \
 ) \
 { \
-    { k06, k05, k04, k03, k02, k01, k00 }, \
-    { k16, k15, k14, k13, k12, k11, k10 }, \
-    { k26, k25, k24, k23, k22, k21, k20 }, \
-    { k36, k35, k34, k33, k32, k31, k30 } \
+    { k00,   k01, k02, k03, k04, k05,   k06 },   \
+    { k10,   k11, k12, k13, k14, k15,   k16 },   \
+    { k20,   k21, k22, k23, k24, k25,   KC_NO }, \
+    { k30,   k31, k32, k33, k34, k35,   k36 },   \
+    { k40,   k41, k42, k43, k44, KC_NO, KC_NO }, \
+    { KC_NO, k51, k52, k53, k54, k55,   k56 }    \
 }
 #else
 #define KEYMAP( \
-      k00, k01, k02, k03, k04, k05, k06, \
-      k10, k11, k12, k13, k14, k15, k16, \
-      k20, k21, k22, k23, k24, k25, k26, \
-      k30, k31, k32, k33, k34, k35,  k36 \
+      k00,  k01,  k02, k03, k04, k05, \
+      k10,  k11,  k12, k13, k14, k15, \
+      k20,  k21,  k22, k23, k24, k25, \
+      k30,  k31,  k32, k33, k34, k35, \
+      k40,  k41,  k42, k43, k44, k45, \
+                  k52, k53,           \
+      k50,  k51,                      \
+      k60,  k61,                      \
+      k62,  k63                       \
 ) \
 { \
-    { k00, k01, k02, k03, k04, k05, k06 }, \
-    { k10, k11, k12, k13, k14, k15, k16 }, \
-    { k20, k21, k22, k23, k24, k25, k26 }, \
-    { k30, k31, k32, k33, k34, k35, k36 } \
+    {k00, k01, k02, k03, k04,   k05  }, \
+    {k10, k11, k12, k13, k14,   k15  }, \
+    {k20, k21, k22, k23, k24,   k25  }, \
+    {k30, k31, k32, k33, k34,   k35  }, \
+    {k40, k41, k42, k43, k44,   k45  }, \
+    {k50, k51, k52, k53, KC_NO, KC_NO}, \
+    {k60, k61, k62, k63, KC_NO, KC_NO}  \
 }
-
 #endif
 
 #endif /* KEYBOARD_CONFIG_H */

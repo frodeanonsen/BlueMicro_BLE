@@ -23,15 +23,13 @@ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR P
 
 /* HARDWARE DEFINITION*/
 /* key matrix size */
-#define MATRIX_ROWS 4
+#define MATRIX_ROWS 6
 #define MATRIX_COLS 7
 
-#define MATRIX_ROW_PINS {13, 24, 9, 10 }
-#define MATRIX_COL_PINS {26, 29, 2, 45, 3, 28, 43 }
+#define MATRIX_ROW_PINS { 30, 26, 29, 2, 45, 28 }   // { F4, F5, F6, F7, B1, B2 }
+#define MATRIX_COL_PINS { 10, 9, 24, 13, 20, 8, 6 } // { D3, D2, D4, C6, D7, E6, B4 }
 #define UNUSED_PINS {}
-#define BACKLIGHT_LED_PIN 38
-#define DEFAULT_PWM_VALUE 10000            // PWM intensity
-#define BACKLIGHT_PWM_ON 1
+#define BACKLIGHT_PWM_ON 0
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
         #define BATTERY_TYPE BATT_LIPO
@@ -40,10 +38,5 @@ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR P
 #define VCC_POLARITY_ON 1
 #define  STATUS_BLE_LED_PIN  19  //blue = 0.19
 #define  STATUS_KB_LED_PIN 17  //red = 0.17
-
-
-    #define I2C_SDA_PIN 15
-    #define I2C_SCK_PIN 17
-
 
 #endif /* HARDWARE_CONFIG_H */
